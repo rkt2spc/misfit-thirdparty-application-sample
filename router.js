@@ -70,7 +70,7 @@ router.post('/misfit-notification', (request, response, next) => {
     requestSender.get({
       url: message.SubscribeURL, // Visit SubscribeURL to confirm Subscription
     }, (err, result) => {
-      if (err) return response.status(500).json(err.message);
+      if (err) return next(err);
       
       // Confirmation Success
       console.log(body);
