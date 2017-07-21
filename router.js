@@ -55,38 +55,38 @@ router.get('/misfit-callback', (request, response, next) => {
 // http://localhost/misfit-notification you'll need an actual server behind the valid domain
 // you verified on our Developer Portal to see this work
 router.post('/misfit-notification', (request, response, next) => {
-    // Request body is sent with Content-Type text/plain
-    // although it actually JSON, this application was
-    // configured to understand text/plain but you still
-    // have to manually parse request body
-    const message = JSON.parse(request.body); // Text -> Json
-    console.log(message); // In case you need to see what it looks like
+  // Request body is sent with Content-Type text/plain
+  // although it actually JSON, this application was
+  // configured to understand text/plain but you still
+  // have to manually parse request body
+  const message = JSON.parse(request.body); // Text -> Json
+  console.log(message); // In case you need to see what it looks like
 
-    // Message Type is used to distinguish 
-    // between SubscriptionConfirmation and actual Notification
-    if (message.Type === 'SubscriptionConfirmation') {
-      // Send Confirmation Message
-      console.log(">>> Confirming subscription at " + message.SubscribeURL);
-      requestSender.get({
-        url: message.SubscribeURL, // Visit SubscribeURL to confirm Subscription
-      }, (err, result) => {
-        if (err) return response.status(500).json(err.message);
-        
-        // Confirmation Success
-        console.log(body);
-        return response.status(200).end();
-      });
-    }
-    // Normal user data notifications
-    else {
-      // Message contain information about user resource changes
-      // You should use this info and find the appropriate user access_token
-      // given at "misfit-callback". With the access_token, you then
-      // retrieve updated user information using our open api
-      // documented here https://build.misfit.com/docs/cloudapi/get_started
-      console.log(message);
-      response.status(200).end();
-    }
+  // Message Type is used to distinguish 
+  // between SubscriptionConfirmation and actual Notification
+  if (message.Type === 'SubscriptionConfirmation') {
+    // Send Confirmation Message
+    console.log(">>> Confirming subscription at " + message.SubscribeURL);
+    requestSender.get({
+      url: message.SubscribeURL, // Visit SubscribeURL to confirm Subscription
+    }, (err, result) => {
+      if (err) return response.status(500).json(err.message);
+      
+      // Confirmation Success
+      console.log(body);
+      return response.status(200).end();
+    });
+  }
+  // Normal user data notifications
+  else {
+    // Message contain information about user resource changes
+    // You should use this info and find the appropriate user access_token
+    // given at "misfit-callback". With the access_token, you then
+    // retrieve updated user information using our open api
+    // documented here https://build.misfit.com/docs/cloudapi/get_started
+    console.log(message);
+    response.status(200).end();
+  }
 });
 
 // Export the router so we can use it in server.js
