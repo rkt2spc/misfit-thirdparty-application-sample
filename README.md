@@ -11,3 +11,6 @@ npm start
 
 ## Note
 Start reading from server.js
+
+## See it in action
+<https://misfit-open-api-demo.herokuapp.com/misfit-login>  
