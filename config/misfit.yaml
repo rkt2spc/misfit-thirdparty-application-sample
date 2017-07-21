@@ -1,0 +1,18 @@
+default:
+  client_id: INSERT_CLIENT_ID_HERE
+  client_secret: INSERT_CLIENT_SECRET_HERE
+  authorize_url: https://api.misfitwearables.com/auth/dialog/authorize
+  token_url: https://api.misfitwearables.com/auth/tokens/exchange
+  redirect_uri: http://localhost:3000/misfit-callback  
+
+# Using the same configuration as default
+development:
+    
+# Using the same configuration as default
+staging:
+
+# Overriding default configuration with these values
+production:
+  client_id: INSERT_CLIENT_ID_HERE
+  client_secret: INSERT_CLIENT_SECRET_HERE
+  redirect_uri: https://yourdomain.com/misfit-callback
