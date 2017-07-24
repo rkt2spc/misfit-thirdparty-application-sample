@@ -73,7 +73,7 @@ router.post('/misfit-notification', (request, response, next) => {
       if (err) return next(err);
       
       // Confirmation Success
-      console.log(body);
+      console.log(result.body);
       return response.status(200).end();
     });
   }
